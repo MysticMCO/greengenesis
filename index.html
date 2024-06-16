@@ -10,8 +10,16 @@
     <div id="sensor-readings">
         <p>Temperature: <span id="temp">Loading...</span>°C</p>
         <p>Humidity: <span id="humidity">Loading...</span>%</p>
-        <!-- Add other sensor data fields here -->
+        <p>Soil Moisture: <span id="soilMoisture">Loading...</span></p>
+        <p>Water Level: <span id="waterLevel">Loading...</span></p>
+        <p>pH: <span id="ph">Loading...</span></p>
+        <p>Nitrogen: <span id="nitrogen">Loading...</span></p>
+        <p>Phosphorus: <span id="phosphorus">Loading...</span></p>
+        <p>Potassium: <span id="potassium">Loading...</span></p>
+        <p>CO2: <span id="co2">Loading...</span> ppm</p>
+        <p>Light Intensity: <span id="lux">Loading...</span> lux</p>
     </div>
+
 
     <script>
         // Your web app's Firebase configuration
@@ -26,6 +34,7 @@
     measurementId: "G-JZ1MFK7LS0"
         };
 
+      
         // Initialize Firebase
         firebase.initializeApp(firebaseConfig);
 
@@ -34,9 +43,16 @@
         // Function to update sensor readings
         function updateSensorReadings(snapshot) {
             const data = snapshot.val();
-            document.getElementById('temp').innerText = data.temperature;
-            document.getElementById('humidity').innerText = data.humidity;
-            // Update other sensor fields similarly
+            document.getElementById('temp').innerText = data.temperature || 'N/A';
+            document.getElementById('humidity').innerText = data.humidity || 'N/A';
+            document.getElementById('soilMoisture').innerText = data.soilMoisture || 'N/A';
+            document.getElementById('waterLevel').innerText = data.waterLevel || 'N/A';
+            document.getElementById('ph').innerText = data.pH || 'N/A';
+            document.getElementById('nitrogen').innerText = data.nitrogen || 'N/A';
+            document.getElementById('phosphorus').innerText = data.phosphorus || 'N/A';
+            document.getElementById('potassium').innerText = data.potassium || 'N/A';
+            document.getElementById('co2').innerText = data.co2 || 'N/A';
+            document.getElementById('lux').innerText = data.lux || 'N/A';
         }
 
         // Set up Firebase listener
