@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Live Sensor Data</title>
+    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-database.js"></script>
+</head>
+<body>
+    <h2>Live Sensor Data</h2>
+    <div id="sensor-readings">
+        <p>Temperature: <span id="temp">Loading...</span>°C</p>
+        <p>Humidity: <span id="humidity">Loading...</span>%</p>
+        <!-- Add other sensor data fields here -->
+    </div>
+
+    <script>
+        // Your web app's Firebase configuration
+        const firebaseConfig = {
+    apiKey: "AIzaSyCLhWLCBZeY7zYUnoUmySgbBIfobJiyUVw",
+    authDomain: "green-genesis.firebaseapp.com",
+    databaseURL: "https://green-genesis-default-rtdb.europe-west1.firebasedatabase.app",
+    projectId: "green-genesis",
+    storageBucket: "green-genesis.appspot.com",
+    messagingSenderId: "551458600145",
+    appId: "1:551458600145:web:bd62f25b2afd6db04a01f0",
+    measurementId: "G-JZ1MFK7LS0"
+        };
+
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+
+        const db = firebase.database();
+
+        // Function to update sensor readings
+        function updateSensorReadings(snapshot) {
+            const data = snapshot.val();
+            document.getElementById('temp').innerText = data.temperature;
+            document.getElementById('humidity').innerText = data.humidity;
+            // Update other sensor fields similarly
+        }
+
+        // Set up Firebase listener
+        const sensorsRef = db.ref('/sensors');
+        sensorsRef.on('value', updateSensorReadings);
+    </script>
+</body>
+</html>
